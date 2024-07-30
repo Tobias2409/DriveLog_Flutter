@@ -1,4 +1,8 @@
+import 'dart:ffi';
+import 'dart:ui';
+
 import 'package:drivelog/widgets/car_display.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatelessWidget {
@@ -10,7 +14,7 @@ class HomePage extends StatelessWidget {
       body: SafeArea(
         child: Column(
           children: [
-            const SizedBox(height: 30,),
+            const SizedBox(height: 15,),
             Row(
               children: [
                 const SizedBox(width: 30,),
@@ -18,10 +22,14 @@ class HomePage extends StatelessWidget {
               ],
             ),
             const CarDisplay(),
+            const SizedBox(height: 15,),
+            const Text("150.000 km", style: TextStyle(
+              fontSize: 40,
+              fontWeight: FontWeight.bold,
+            ),)
           ],
         ),
       ),
-
     );
   }
 }
