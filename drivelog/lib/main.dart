@@ -22,6 +22,12 @@ class MyApp extends StatelessWidget {
             errorColor: Colors.red,
             brightness: Brightness.dark,
         ),
+        textTheme: const TextTheme(
+          headlineLarge: TextStyle(
+            fontSize: 35,
+            fontWeight: FontWeight.bold,
+          ),
+        )
       ),
       home: const Home(),
     );
