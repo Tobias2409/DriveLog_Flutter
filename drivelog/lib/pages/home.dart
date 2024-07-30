@@ -30,6 +30,10 @@ class HomePage extends StatelessWidget {
           ],
         ),
       ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {print("Add Entry");},
+        child: Transform.scale(scale: 1.5, child: const Icon(Icons.add),),
+      ),
     );
   }
 }
