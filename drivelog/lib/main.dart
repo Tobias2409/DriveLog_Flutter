@@ -1,4 +1,5 @@
 import 'package:drivelog/pages/home.dart';
+import 'package:drivelog/pages/root.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -29,7 +30,7 @@ class MyApp extends StatelessWidget {
           ),
         )
       ),
-      home: const Home(),
+      home: const RootPage(),
     );
   }
 }
