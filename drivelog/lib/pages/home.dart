@@ -1,3 +1,4 @@
+import 'package:drivelog/widgets/car_display.dart';
 import 'package:flutter/material.dart';
 
 class Home extends StatelessWidget {
@@ -5,9 +6,13 @@ class Home extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return const Scaffold(
       body: SafeArea(
-        child: Placeholder(),
+        child: Column(
+          children: [
+            CarDisplay(),
+          ],
+        ),
       ),
     );
   }
