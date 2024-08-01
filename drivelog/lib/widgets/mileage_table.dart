@@ -12,9 +12,9 @@ class MileageTable extends StatelessWidget {
       width: MediaQuery.of(context).size.width,
       child: DataTable(
         columns: [
-          DataColumn(label: SizedBox(width: MediaQuery.sizeOf(context).width / 5, child: Center(child: Icon(Icons.calendar_month)))),
-          DataColumn(label: SizedBox(width: MediaQuery.sizeOf(context).width / 5, child: Center(child: Icon(Icons.speed)))),
-          DataColumn(label: SizedBox(width: MediaQuery.sizeOf(context).width / 5, child: Center(child: Icon(Icons.local_gas_station)))),
+          DataColumn(label: SizedBox(width: MediaQuery.sizeOf(context).width / 5, child: const Center(child: Icon(Icons.calendar_month,)))),
+          DataColumn(label: SizedBox(width: MediaQuery.sizeOf(context).width / 5, child: const Center(child: Icon(Icons.speed)))),
+          DataColumn(label: SizedBox(width: MediaQuery.sizeOf(context).width / 5, child: const Center(child: Icon(Icons.local_gas_station)))),
         ],
         rows: onlyData?[]: [
           DataRow(cells: [

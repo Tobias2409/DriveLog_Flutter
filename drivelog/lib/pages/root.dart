@@ -2,6 +2,7 @@ import 'package:drivelog/pages/home.dart';
 import 'package:drivelog/pages/settings.dart';
 import 'package:drivelog/pages/stats.dart';
 import 'package:flutter/material.dart';
+import "dart:math" show pi;
 
 class RootPage extends StatefulWidget {
   const RootPage({super.key});
@@ -19,7 +20,7 @@ class _RootPageState extends State<RootPage> {
     return Scaffold(
       body: [const HomePage(),const StatsPage(),const SettingsPage()][selectedIndex],
       bottomNavigationBar:  Transform.translate(
-        offset: Offset.fromDirection(1.5,15),
+        offset: Offset.fromDirection(pi/2,15),
         child: NavigationBar(
           selectedIndex: selectedIndex,
           onDestinationSelected: (i) => {
@@ -27,7 +28,7 @@ class _RootPageState extends State<RootPage> {
               selectedIndex = i;
               })
           },
-          backgroundColor: const Color.fromRGBO(64, 68, 79, 1),
+          backgroundColor: Theme.of(context).dividerColor,
           labelBehavior: NavigationDestinationLabelBehavior.alwaysHide,
           height: 60,
           destinations: const [

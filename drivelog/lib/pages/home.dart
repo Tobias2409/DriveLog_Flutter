@@ -1,7 +1,8 @@
+import 'package:drivelog/modals/add_entry.dart';
 import 'package:drivelog/widgets/car_display.dart';
 import 'package:drivelog/widgets/mileage_table.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
+import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});

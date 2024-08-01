@@ -15,20 +15,13 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'DriveLog',
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSwatch(
-            primarySwatch: Colors.blue,
-            accentColor: Colors.orange,
-            cardColor: Colors.yellow,
-            backgroundColor: const Color.fromRGBO(42, 45, 52, 1),
-            errorColor: Colors.red,
-            brightness: Brightness.dark,
-        ),
-        textTheme: const TextTheme(
-          headlineLarge: TextStyle(
-            fontSize: 35,
-            fontWeight: FontWeight.bold,
-          ),
-        )
+        colorSchemeSeed: Colors.blue,
+      ),
+      darkTheme: ThemeData(
+        brightness: Brightness.dark,
+        scaffoldBackgroundColor: const Color.fromRGBO(42, 45, 52, 1),
+        colorSchemeSeed: Colors.blue,
+        dividerColor: const Color.fromRGBO(64, 68, 79, 1)
       ),
       home: const RootPage(),
     );
