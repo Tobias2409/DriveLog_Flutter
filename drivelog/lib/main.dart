@@ -15,9 +15,6 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'DriveLog',
       theme: ThemeData(
-        colorSchemeSeed: Colors.blue,
-      ),
-      darkTheme: ThemeData(
         brightness: Brightness.dark,
         scaffoldBackgroundColor: const Color.fromRGBO(42, 45, 52, 1),
         colorSchemeSeed: Colors.blue,
