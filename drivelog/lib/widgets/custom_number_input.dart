@@ -24,7 +24,7 @@ class _CustomNumberInputState extends State<CustomNumberInput> {
 
   final TextEditingController _controller = TextEditingController();
 
-  double _value = .6000;
+  double _value = 0;
 
   String decimalSeparator = "x";
 
