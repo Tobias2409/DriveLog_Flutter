@@ -89,7 +89,10 @@ class _HomePageState extends State<HomePage> {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {print("Add Entry");},
+        onPressed: () {
+          _scrollController.animateTo(0, duration: const Duration(milliseconds: 500), curve: Curves.easeOut);
+          AddEntryModal.show(context);
+        },
         child: Transform.scale(scale: 1.5, child: const Icon(Icons.add),),
       ),
     );
