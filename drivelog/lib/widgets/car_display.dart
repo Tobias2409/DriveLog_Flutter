@@ -13,7 +13,7 @@ class CarDisplay extends StatelessWidget {
           child: const SizedBox(
             height: 200,
             child: ModelViewer(
-              src: 'assets/cars/car.glb',
+              src: 'assets/cars/car_black.glb',
               autoPlay: false,
               autoRotate: false,
               cameraControls: false,
