@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:model_viewer_plus/model_viewer_plus.dart';
 
 class CarDisplay extends StatelessWidget {
-  const CarDisplay({super.key});
+  const CarDisplay({super.key, required this.color});
+
+  final String color;
 
   @override
   Widget build(BuildContext context) {
@@ -10,10 +12,10 @@ class CarDisplay extends StatelessWidget {
       children: [
         Transform.scale(
           scale: 1.8,
-          child: const SizedBox(
+          child: SizedBox(
             height: 200,
             child: ModelViewer(
-              src: 'assets/cars/car_black.glb',
+              src: 'assets/cars/car_$color.glb',
               autoPlay: false,
               autoRotate: false,
               cameraControls: false,

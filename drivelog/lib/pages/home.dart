@@ -49,7 +49,7 @@ class _HomePageState extends State<HomePage> {
                     child: const Column(
                       children: [
                         SizedBox(height: 15,),
-                        CarDisplay(),
+                        CarDisplay(color: "yellow",),
                         SizedBox(height: 15,),
                         Text("150.000 km", style: TextStyle(
                           fontSize: 40,
@@ -77,7 +77,7 @@ class _HomePageState extends State<HomePage> {
                       const Row(
                         children: [
                           SizedBox(width: 40,),
-                          SizedBox(width: 50,height: 60, child: CarDisplay(),),
+                          SizedBox(width: 50,height: 60, child: CarDisplay(color: "yellow",),),
                           Spacer(),
                           Text("150.000 km", style: TextStyle(
                             fontSize: 24,

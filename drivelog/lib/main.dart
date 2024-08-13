@@ -1,3 +1,4 @@
+import 'package:drivelog/pages/car_model_selection.dart';
 import 'package:drivelog/pages/home.dart';
 import 'package:drivelog/pages/root.dart';
 import 'package:flutter/material.dart';
@@ -20,7 +21,8 @@ class MyApp extends StatelessWidget {
         colorSchemeSeed: Colors.blue,
         dividerColor: const Color.fromRGBO(64, 68, 79, 1)
       ),
-      home: const RootPage(),
+      //home: const RootPage(),
+      home: CarModelSelection(),
     );
   }
 }
