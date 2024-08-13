@@ -34,6 +34,7 @@ class _HomePageState extends State<HomePage> {
     super.initState();
   }
 
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -62,27 +63,33 @@ class _HomePageState extends State<HomePage> {
                 ),
               ],
             ),
-            Container(
-              height: 116,
-              color: Theme.of(context).scaffoldBackgroundColor,
-              child: Column(
-                children: [
-                  if(_scrolled)
-                    const Row(
-                      children: [
-                        SizedBox(width: 40,),
-                        SizedBox(width: 50,height: 60, child: CarDisplay(),),
-                        Spacer(),
-                        Text("150.000 km", style: TextStyle(
-                          fontSize: 24,
-                          fontWeight: FontWeight.bold,
-                        ),),
-                        SizedBox(width: 30,),
-                      ],
-                    ),
-                  if(_scrolled)
-                    const MileageTable(onlyData: true,),
-                ],
+            Visibility(
+              maintainSize: true,
+              maintainAnimation: true,
+              maintainState: true,
+              visible: _scrolled,
+              child: Container(
+                height: 116,
+                color: Theme.of(context).scaffoldBackgroundColor,
+                child: Column(
+                  children: [
+                    if(true || _scrolled)
+                      const Row(
+                        children: [
+                          SizedBox(width: 40,),
+                          SizedBox(width: 50,height: 60, child: CarDisplay(),),
+                          Spacer(),
+                          Text("150.000 km", style: TextStyle(
+                            fontSize: 24,
+                            fontWeight: FontWeight.bold,
+                          ),),
+                          SizedBox(width: 30,),
+                        ],
+                      ),
+                    if(true || _scrolled)
+                      const MileageTable(onlyData: true,),
+                  ],
+                ),
               ),
             )
           ],
