@@ -1,3 +1,7 @@
+import 'dart:async';
+
+import 'package:drivelog/db/db_service.dart';
+import 'package:drivelog/db/models/car_dao.dart';
 import 'package:drivelog/widgets/custom_button.dart';
 import 'package:drivelog/widgets/custom_number_input.dart';
 import 'package:drivelog/widgets/selection_header.dart';
@@ -22,6 +26,19 @@ class AddEntryModal extends StatefulWidget {
 class _AddEntryModalState extends State<AddEntryModal> {
 
   int _selectedMenu = 1;
+  Future<DBService> dbService = DBService.getInstance();
+  
+  @override
+  initState() {
+    
+    var car = CarDAO(name: "Corsa", image: "hee");
+    dbService.then((db) {
+      db.insert(car);
+    });
+
+    
+    super.initState();
+  }
 
   Widget titleText(String text){
     return Row(
