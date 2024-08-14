@@ -1,3 +1,6 @@
+import 'package:drivelog/db/db_service.dart';
+import 'package:drivelog/db/models/car_dao.dart';
+import 'package:drivelog/services/car_service.dart';
 import 'package:drivelog/widgets/car_display.dart';
 import 'package:drivelog/widgets/custom_button.dart';
 import 'package:drivelog/widgets/custom_number_input.dart';
@@ -5,10 +8,18 @@ import 'package:flutter/material.dart';
 
 import '../../widgets/custom_text_input.dart';
 
-class AddCarPage extends StatelessWidget {
+class AddCarPage extends StatefulWidget {
   const AddCarPage({super.key, required this.color});
 
   final String color;
+
+  @override
+  State<AddCarPage> createState() => _AddCarPageState();
+}
+
+class _AddCarPageState extends State<AddCarPage> {
+
+  String _carName = "";
 
   Widget titleText(String text){
     return Row(
@@ -27,6 +38,21 @@ class AddCarPage extends StatelessWidget {
         ),
       ],
     );
+  }
+
+  _saveCar() async {
+    if(_carName.length <= 2){
+      return;
+    }
+
+    var dao = CarDAO(name: _carName, image: 'car_${widget.color}');
+
+    var carService = CarService.getInstance();
+    await carService.addCar(dao);
+
+    if (mounted) {
+      Navigator.pop(context);
+    }
   }
 
   @override
@@ -49,14 +75,14 @@ class AddCarPage extends StatelessWidget {
                   Spacer(),
                 ],
               ),
-              CarDisplay(color: color,),
+              CarDisplay(color: widget.color,),
               const SizedBox(height: 20,),
               titleText("Name"),
-              CustomTextInput(changed: (val){print(val);},),
+              CustomTextInput(changed: (val){_carName = val;},),
               const Spacer(),
               Row(children: [
                 const Spacer(),
-                CustomButton(onPressed: (){}, text: "Add")
+                CustomButton(onPressed: _saveCar, text: "Add")
               ],)
             ],
           ),

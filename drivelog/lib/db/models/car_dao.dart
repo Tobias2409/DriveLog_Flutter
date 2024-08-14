@@ -74,6 +74,33 @@ class CarDAO {
     };
   }
 
+  factory CarDAO.fromMap(Map<String, dynamic> map) {
+    return CarDAO(
+      id: map['ID'] ?? 0,
+      name: map['Name'] ?? '',
+      image: map['Image'] ?? '',
+      manufacturer: map['Manufacturer'],
+      model: map['Model'],
+      year: map['Year'],
+      engineType: map['EngineType'],
+      transmissionType: map['TransmissionType'],
+      fuelType: map['FuelType'],
+      mileage: map['Mileage']?.toDouble(),
+      color: map['Color'],
+      price: map['Price']?.toDouble(),
+      vin: map['VIN'],
+      numberOfDoors: map['NumberOfDoors'],
+      seatingCapacity: map['SeatingCapacity'],
+      horsepower: map['Horsepower'],
+      torque: map['Torque']?.toDouble(),
+      driveType: map['DriveType'],
+      safetyRating: map['SafetyRating']?.toDouble(),
+      features: map['Features'],
+      description: map['Description'],
+      dateAdded: DateTime.parse(map['DateAdded']),
+    );
+  }
+
   @override
   String toString() {
     return 'CarDAO{'
