@@ -1,6 +1,7 @@
 
 import 'package:drivelog/db/models/car_dao.dart';
 import 'package:drivelog/helpers/observable.dart';
+import 'package:flutter/cupertino.dart';
 
 import '../db/db_service.dart';
 
@@ -32,5 +33,18 @@ class CarService extends Observable{
     var db = await _dbService;
     await db.insert(car);
     notify();
+  }
+
+  Future<List<CarDAO>> getCars() async {
+    var db = await _dbService;
+    List<CarDAO> list = [];
+
+    var result = await db.query("SELECT * FROM Car", []);
+
+    for (var x in result) {
+      list.add(CarDAO.fromMap(x));
+    }
+
+    return list;
   }
 }

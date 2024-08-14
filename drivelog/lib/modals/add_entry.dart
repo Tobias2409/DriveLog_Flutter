@@ -30,13 +30,6 @@ class _AddEntryModalState extends State<AddEntryModal> {
   
   @override
   initState() {
-    
-    var car = CarDAO(name: "Corsa", image: "hee");
-    dbService.then((db) {
-      db.insert(car);
-    });
-
-    
     super.initState();
   }
 

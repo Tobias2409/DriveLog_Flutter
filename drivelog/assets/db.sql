@@ -2,7 +2,8 @@
 CREATE TABLE Car(
     ID INTEGER PRIMARY KEY AUTOINCREMENT,
     Name VARCHAR(255) NOT NULL,
-    Image VARCHAR(255) NOT NULL,
+    ModelColor VARCHAR(255) NOT NULL,
+    ModelType VARCHAR(255) NOT NULL,
     Manufacturer VARCHAR(255),                      -- The company that makes the car
     Model VARCHAR(255),                             -- The specific model of the car
     Year INTEGER,                                   -- The manufacturing year of the car

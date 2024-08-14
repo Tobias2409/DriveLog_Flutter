@@ -1,7 +1,8 @@
 class CarDAO {
   int id;
   String name;
-  String image;
+  String modelColor;
+  String modelType;
   String? manufacturer;
   String? model;
   int? year;
@@ -25,7 +26,8 @@ class CarDAO {
   CarDAO({
     this.id = 0,
     required this.name,
-    required this.image,
+    required this.modelColor,
+    required this.modelType,
     this.manufacturer,
     this.model,
     this.year,
@@ -51,7 +53,8 @@ class CarDAO {
     return {
       if (id != 0) "ID": id,
       "Name": name,
-      "Image": image,
+      "ModelColor": modelColor,
+      "ModelType": modelType,
       "Manufacturer": manufacturer,
       "Model": model,
       "Year": year,
@@ -78,7 +81,8 @@ class CarDAO {
     return CarDAO(
       id: map['ID'] ?? 0,
       name: map['Name'] ?? '',
-      image: map['Image'] ?? '',
+      modelColor: map['ModelColor'] ?? '',
+      modelType: map['ModelType'] ?? '',
       manufacturer: map['Manufacturer'],
       model: map['Model'],
       year: map['Year'],
@@ -106,7 +110,8 @@ class CarDAO {
     return 'CarDAO{'
         'id: $id, '
         'name: $name, '
-        'image: $image, '
+        'modelColor: $modelColor, '
+        'modelType: $modelType, '
         'manufacturer: $manufacturer, '
         'model: $model, '
         'year: $year, '

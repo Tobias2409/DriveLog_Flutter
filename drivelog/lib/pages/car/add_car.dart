@@ -45,7 +45,7 @@ class _AddCarPageState extends State<AddCarPage> {
       return;
     }
 
-    var dao = CarDAO(name: _carName, image: 'car_${widget.color}');
+    var dao = CarDAO(name: _carName, modelColor: widget.color, modelType: 'car');
 
     var carService = CarService.getInstance();
     await carService.addCar(dao);
