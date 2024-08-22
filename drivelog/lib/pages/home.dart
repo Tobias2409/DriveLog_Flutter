@@ -1,10 +1,12 @@
 import 'package:drivelog/db/models/car_dao.dart';
+import 'package:drivelog/helpers/observer.dart';
 import 'package:drivelog/modals/add_entry.dart';
 import 'package:drivelog/services/car_service.dart';
 import 'package:drivelog/widgets/car_display.dart';
 import 'package:drivelog/widgets/mileage_table.dart';
 import 'package:flutter/material.dart';
-import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
+
+import '../models/event.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -15,7 +17,11 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   final ScrollController _scrollController = ScrollController();
+  late final _observer;
+
   bool _scrolled = false;
+  var _mileage = 0;
+  List<Event> _events = [];
 
   final _carService = CarService.getInstance();
   List<CarDAO> _cars = [];
@@ -36,17 +42,36 @@ class _HomePageState extends State<HomePage> {
   @override
   void initState() {
     _getCars();
+    _getEventData();
     _scrollController.addListener(_handleScroll);
+
+    _observer = Observer(_getEventData);
+    _carService.subscribe(_observer);
     super.initState();
+  }
+
+  @override
+  void dispose() {
+    _carService.unsubscribe(_observer);
+    super.dispose();
   }
 
   _getCars() async{
     var result = await _carService.getCars();
-
     setState(() {
       _cars = result;
     });
   }
+
+  _getEventData() async{
+    var result = await _carService.getMileage(1);
+    var events = await _carService.getEvents(1);
+    setState(() {
+      _mileage = result.round();
+      _events = events;
+    });
+  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -64,12 +89,12 @@ class _HomePageState extends State<HomePage> {
                         const SizedBox(height: 15,),
                         CarDisplay(color: _cars[0].modelColor,),
                         const SizedBox(height: 15,),
-                        const Text("150.000 km", style: TextStyle(
+                         Text("$_mileage km", style: const TextStyle(
                           fontSize: 40,
                           fontWeight: FontWeight.bold,
                         ),),
                         const SizedBox(height: 10,),
-                        const MileageTable(),
+                        MileageTable(events: _events,),
                       ],
                     ),
                   ),
@@ -91,14 +116,14 @@ class _HomePageState extends State<HomePage> {
                           const SizedBox(width: 40,),
                           SizedBox(width: 50,height: 60, child: CarDisplay(color: _cars[0].modelColor,),),
                           const Spacer(),
-                          const Text("150.000 km", style: TextStyle(
+                          Text("$_mileage km", style: const TextStyle(
                             fontSize: 24,
                             fontWeight: FontWeight.bold,
                           ),),
                           const SizedBox(width: 30,),
                         ],
                       ),
-                      const MileageTable(onlyData: true,),
+                      const MileageTable(events: [], onlyData: true,),
                   ],
                 ),
               ),

@@ -1,6 +1,8 @@
 
 import 'package:drivelog/db/models/car_dao.dart';
+import 'package:drivelog/db/models/trip_dao.dart';
 import 'package:drivelog/helpers/observable.dart';
+import 'package:drivelog/models/event.dart';
 import 'package:flutter/cupertino.dart';
 
 import '../db/db_service.dart';
@@ -35,6 +37,12 @@ class CarService extends Observable{
     notify();
   }
 
+  Future<void> addTrip(TripDAO dao) async{
+    var db = await _dbService;
+    await db.insert(dao);
+    notify();
+  }
+
   Future<List<CarDAO>> getCars() async {
     var db = await _dbService;
     List<CarDAO> list = [];
@@ -47,4 +55,30 @@ class CarService extends Observable{
 
     return list;
   }
+
+  Future<double> getMileage(int carID) async{
+    var db = await _dbService;
+
+    var trips = await db.query("SELECT IFNULL(SUM(Distance),0.0) d FROM Trip WHERE CarFK = ?", [carID]);
+
+    return trips[0]['d'] as double;
+  }
+
+  Future<List<Event>> getEvents(int carID) async{
+    var db = await _dbService;
+
+    var trips = await db.query("SELECT * FROM Trip WHERE CarFK = ?", [carID]);
+    var refuels = await db.query("SELECT * FROM Trip WHERE CarFK = ?", [carID]);
+
+    List<Event> events = [];
+
+    for(var trip in trips){
+      events.add(Event(EventType.trip, DateTime.parse(trip['DateAdded'] as String) , trip["Distance"] as double, trip["FuelConsumption"] as double?));
+    }
+
+    return events;
+
+  }
+
+
 }

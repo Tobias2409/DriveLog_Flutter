@@ -1,14 +1,26 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
+
+import '../models/event.dart';
 
 class MileageTable extends StatelessWidget {
-  const MileageTable({super.key, this.onlyData = false});
+  const MileageTable({super.key, required this.events, this.onlyData = false, });
 
+  final List<Event> events;
   final bool onlyData;
+
+  DataRow mapEvent(Event event,  BuildContext context){
+    return DataRow(cells: [
+      DataCell(SizedBox(width: MediaQuery.sizeOf(context).width / 5,child: Center(child: Text(DateFormat('dd.MM').format(event.dateAdded),)))),
+      DataCell(SizedBox(width: MediaQuery.sizeOf(context).width / 5,child: Center(child: Text("${event.distance}km")))),
+      DataCell(SizedBox(width: MediaQuery.sizeOf(context).width / 5,child: Center(child: Text("${event.fuelConsumption}l")))),
+    ]);
+  }
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       width: MediaQuery.of(context).size.width,
       child: DataTable(
         columns: [
@@ -16,110 +28,9 @@ class MileageTable extends StatelessWidget {
           DataColumn(label: SizedBox(width: MediaQuery.sizeOf(context).width / 5, child: const Center(child: Icon(Icons.speed)))),
           DataColumn(label: SizedBox(width: MediaQuery.sizeOf(context).width / 5, child: const Center(child: Icon(Icons.local_gas_station)))),
         ],
-        rows: onlyData?[]: [
-          DataRow(cells: [
-            DataCell(SizedBox(width: MediaQuery.sizeOf(context).width / 5,child: const Center(child: Text("1")))),
-            DataCell(SizedBox(width: MediaQuery.sizeOf(context).width / 5,child: const Center(child: Text("4500km")))),
-            DataCell(SizedBox(width: MediaQuery.sizeOf(context).width / 5,child: const Center(child: Text("45l")))),
-          ]),
-          DataRow(cells: [
-            DataCell(SizedBox(width: MediaQuery.sizeOf(context).width / 5,child: const Center(child: Text("2")))),
-            DataCell(SizedBox(width: MediaQuery.sizeOf(context).width / 5,child: const Center(child: Text("4500km")))),
-            DataCell(SizedBox(width: MediaQuery.sizeOf(context).width / 5,child: const Center(child: Text("45l")))),
-          ]),
-          DataRow(cells: [
-            DataCell(SizedBox(width: MediaQuery.sizeOf(context).width / 5,child: const Center(child: Text("3")))),
-            DataCell(SizedBox(width: MediaQuery.sizeOf(context).width / 5,child: const Center(child: Text("4500km")))),
-            DataCell(SizedBox(width: MediaQuery.sizeOf(context).width / 5,child: const Center(child: Text("45l")))),
-          ]),
-          DataRow(cells: [
-            DataCell(SizedBox(width: MediaQuery.sizeOf(context).width / 5,child: const Center(child: Text("4")))),
-            DataCell(SizedBox(width: MediaQuery.sizeOf(context).width / 5,child: const Center(child: Text("4500km")))),
-            DataCell(SizedBox(width: MediaQuery.sizeOf(context).width / 5,child: const Center(child: Text("45l")))),
-          ]),
-          DataRow(cells: [
-            DataCell(SizedBox(width: MediaQuery.sizeOf(context).width / 5,child: const Center(child: Text("5")))),
-            DataCell(SizedBox(width: MediaQuery.sizeOf(context).width / 5,child: const Center(child: Text("4500km")))),
-            DataCell(SizedBox(width: MediaQuery.sizeOf(context).width / 5,child: const Center(child: Text("45l")))),
-          ]),
-          DataRow(cells: [
-            DataCell(SizedBox(width: MediaQuery.sizeOf(context).width / 5,child: const Center(child: Text("6")))),
-            DataCell(SizedBox(width: MediaQuery.sizeOf(context).width / 5,child: const Center(child: Text("4500km")))),
-            DataCell(SizedBox(width: MediaQuery.sizeOf(context).width / 5,child: const Center(child: Text("45l")))),
-          ]),
-          DataRow(cells: [
-            DataCell(SizedBox(width: MediaQuery.sizeOf(context).width / 5,child: const Center(child: Text("7")))),
-            DataCell(SizedBox(width: MediaQuery.sizeOf(context).width / 5,child: const Center(child: Text("4500km")))),
-            DataCell(SizedBox(width: MediaQuery.sizeOf(context).width / 5,child: const Center(child: Text("45l")))),
-          ]),
-          DataRow(cells: [
-            DataCell(SizedBox(width: MediaQuery.sizeOf(context).width / 5,child: const Center(child: Text("8")))),
-            DataCell(SizedBox(width: MediaQuery.sizeOf(context).width / 5,child: const Center(child: Text("4500km")))),
-            DataCell(SizedBox(width: MediaQuery.sizeOf(context).width / 5,child: const Center(child: Text("45l")))),
-          ]),
-          DataRow(cells: [
-            DataCell(SizedBox(width: MediaQuery.sizeOf(context).width / 5,child: const Center(child: Text("22.12")))),
-            DataCell(SizedBox(width: MediaQuery.sizeOf(context).width / 5,child: const Center(child: Text("4500km")))),
-            DataCell(SizedBox(width: MediaQuery.sizeOf(context).width / 5,child: const Center(child: Text("45l")))),
-          ]),
-          DataRow(cells: [
-            DataCell(SizedBox(width: MediaQuery.sizeOf(context).width / 5,child: const Center(child: Text("22.12")))),
-            DataCell(SizedBox(width: MediaQuery.sizeOf(context).width / 5,child: const Center(child: Text("4500km")))),
-            DataCell(SizedBox(width: MediaQuery.sizeOf(context).width / 5,child: const Center(child: Text("45l")))),
-          ]),
-          DataRow(cells: [
-            DataCell(SizedBox(width: MediaQuery.sizeOf(context).width / 5,child: const Center(child: Text("22.12")))),
-            DataCell(SizedBox(width: MediaQuery.sizeOf(context).width / 5,child: const Center(child: Text("4500km")))),
-            DataCell(SizedBox(width: MediaQuery.sizeOf(context).width / 5,child: const Center(child: Text("45l")))),
-          ]),
-          DataRow(cells: [
-            DataCell(SizedBox(width: MediaQuery.sizeOf(context).width / 5,child: const Center(child: Text("22.12")))),
-            DataCell(SizedBox(width: MediaQuery.sizeOf(context).width / 5,child: const Center(child: Text("4500km")))),
-            DataCell(SizedBox(width: MediaQuery.sizeOf(context).width / 5,child: const Center(child: Text("45l")))),
-          ]),
-          DataRow(cells: [
-            DataCell(SizedBox(width: MediaQuery.sizeOf(context).width / 5,child: const Center(child: Text("22.12")))),
-            DataCell(SizedBox(width: MediaQuery.sizeOf(context).width / 5,child: const Center(child: Text("4500km")))),
-            DataCell(SizedBox(width: MediaQuery.sizeOf(context).width / 5,child: const Center(child: Text("45l")))),
-          ]),
-          DataRow(cells: [
-            DataCell(SizedBox(width: MediaQuery.sizeOf(context).width / 5,child: const Center(child: Text("22.12")))),
-            DataCell(SizedBox(width: MediaQuery.sizeOf(context).width / 5,child: const Center(child: Text("4500km")))),
-            DataCell(SizedBox(width: MediaQuery.sizeOf(context).width / 5,child: const Center(child: Text("45l")))),
-          ]),
-          DataRow(cells: [
-            DataCell(SizedBox(width: MediaQuery.sizeOf(context).width / 5,child: const Center(child: Text("22.12")))),
-            DataCell(SizedBox(width: MediaQuery.sizeOf(context).width / 5,child: const Center(child: Text("4500km")))),
-            DataCell(SizedBox(width: MediaQuery.sizeOf(context).width / 5,child: const Center(child: Text("45l")))),
-          ]),
-        ]),
+        rows: events.map((x) => mapEvent(x, context)).toList(growable: false),
+      ),
     );
   }
 }
 
-
-/*
-Table(
-              columnWidths: const <int, TableColumnWidth>{
-                0: FlexColumnWidth(),
-                1: FlexColumnWidth(),
-                2: FlexColumnWidth(),
-              },
-              children: const [
-                TableRow(
-                  children: [
-                    TableCell(child: Icon(Icons.calendar_month)),
-                    TableCell(child: Icon(Icons.speed)),
-                    TableCell(child: Icon(Icons.local_gas_station)),
-                  ]
-                ),
-                TableRow(
-                  children: [
-                    TableCell(child: Text("02.12")),
-                    TableCell(child: Text("650km")),
-                    TableCell(child: Text("45l")),
-                  ]
-                ),
-              ],
-            ),
- */
