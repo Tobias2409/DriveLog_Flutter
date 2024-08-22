@@ -1,14 +1,12 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
 import '../models/event.dart';
 
 class MileageTable extends StatelessWidget {
-  const MileageTable({super.key, required this.events, this.onlyData = false, });
+  const MileageTable({super.key, required this.events});
 
   final List<Event> events;
-  final bool onlyData;
 
   DataRow mapEvent(Event event,  BuildContext context){
     return DataRow(cells: [

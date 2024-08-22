@@ -123,7 +123,7 @@ class _HomePageState extends State<HomePage> {
                           const SizedBox(width: 30,),
                         ],
                       ),
-                      const MileageTable(events: [], onlyData: true,),
+                      const MileageTable(events: []),
                   ],
                 ),
               ),
