@@ -6,7 +6,6 @@ import 'package:drivelog/widgets/car_display.dart';
 import 'package:drivelog/widgets/mileage_table.dart';
 import 'package:flutter/material.dart';
 
-import '../models/event.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -17,11 +16,10 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   final ScrollController _scrollController = ScrollController();
-  late final _observer;
+  late final Observer _observer;
 
   bool _scrolled = false;
   var _mileage = 0;
-  List<Event> _events = [];
 
   final _carService = CarService.getInstance();
   List<CarDAO> _cars = [];
@@ -65,10 +63,8 @@ class _HomePageState extends State<HomePage> {
 
   _getEventData() async{
     var result = await _carService.getMileage(1);
-    var events = await _carService.getEvents(1);
     setState(() {
       _mileage = result.round();
-      _events = events;
     });
   }
 
@@ -94,7 +90,7 @@ class _HomePageState extends State<HomePage> {
                           fontWeight: FontWeight.bold,
                         ),),
                         const SizedBox(height: 10,),
-                        MileageTable(events: _events,),
+                        const MileageTable(),
                       ],
                     ),
                   ),
@@ -123,7 +119,7 @@ class _HomePageState extends State<HomePage> {
                           const SizedBox(width: 30,),
                         ],
                       ),
-                      const MileageTable(events: []),
+                      const MileageTable(onlyHeader: true,),
                   ],
                 ),
               ),

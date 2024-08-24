@@ -1,13 +1,15 @@
 import 'package:drivelog/helpers/delimiter_helper.dart';
+import 'package:drivelog/helpers/observer.dart';
+import 'package:drivelog/services/car_service.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
 import '../models/event.dart';
 
 class MileageTable extends StatefulWidget {
-  const MileageTable({super.key, required this.events});
+  const MileageTable({super.key, this.onlyHeader = false,});
 
-  final List<Event> events;
+  final bool onlyHeader;
 
   @override
   State<MileageTable> createState() => _MileageTableState();
@@ -15,6 +17,10 @@ class MileageTable extends StatefulWidget {
 
 class _MileageTableState extends State<MileageTable> {
 
+  late final Observer observer;
+  final CarService carService = CarService.getInstance();
+
+  List<Event> events = [];
   String delimiter = "x";
 
   @override
@@ -24,6 +30,19 @@ class _MileageTableState extends State<MileageTable> {
     DelimiterHelper.getDelimiter(context).then((x) => setState(() {
       delimiter = x;
     }));
+
+    updateData();
+    observer = Observer(updateData);
+    carService.subscribe(observer);
+
+  }
+
+  updateData() async {
+    var data = await carService.getEvents(1);
+
+    setState(() {
+      events = data;
+    });
   }
   
   double calculateWidth(BuildContext context){
@@ -50,7 +69,7 @@ class _MileageTableState extends State<MileageTable> {
           DataColumn(label: SizedBox(width: calculateWidth(context), child: const Center(child: Icon(Icons.speed)))),
           DataColumn(label: SizedBox(width: calculateWidth(context), child: const Center(child: Icon(Icons.local_gas_station)))),
         ],
-        rows: widget.events.map((x) => mapEvent(x, context)).toList(growable: false),
+        rows: widget.onlyHeader ? [] : events.map((x) => mapEvent(x, context)).toList(growable: false),
       ),
     );
   }
