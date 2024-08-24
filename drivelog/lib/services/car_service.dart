@@ -69,7 +69,7 @@ class CarService extends Observable{
 
     var trips = await db.query("SELECT IFNULL(SUM(Distance),0.0) d FROM Trip WHERE CarFK = ?", [carID]);
 
-    return trips[0]['d'] as double;
+    return (trips[0]['d'] as num).toDouble();
   }
 
   Future<List<Event>> getEvents(int carID) async{
