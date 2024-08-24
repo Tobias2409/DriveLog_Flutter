@@ -73,7 +73,7 @@ class CarService extends Observable{
     List<Event> events = [];
 
     for(var trip in trips){
-      events.add(Event(EventType.trip, DateTime.parse(trip['DateAdded'] as String) , trip["Distance"] as double, trip["FuelConsumption"] as double?));
+      events.add(Event(EventType.trip, DateTime.parse(trip['DateAdded'] as String) , (trip["Distance"] as num).toDouble(), (trip["FuelConsumption"] as num?)?.toDouble()));
     }
 
     return events;
