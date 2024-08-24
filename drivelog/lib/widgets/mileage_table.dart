@@ -42,7 +42,8 @@ class _MileageTableState extends State<MileageTable> {
     var data = await carService.getEvents(1);
 
     setState(() {
-      oneTypeOnly = !(data.map((x) => x.eventType).toSet().length != 1);
+      int count = data.map((x) => x.eventType).toSet().length;
+      oneTypeOnly = count == 0 || count == 1;
       if(!widget.onlyHeader) {
         events = data;
       }
