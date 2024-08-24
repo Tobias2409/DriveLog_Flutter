@@ -22,6 +22,7 @@ class _MileageTableState extends State<MileageTable> {
 
   List<Event> events = [];
   String delimiter = "x";
+  bool oneTypeOnly = false;
 
   @override
   void initState() {
@@ -41,16 +42,24 @@ class _MileageTableState extends State<MileageTable> {
     var data = await carService.getEvents(1);
 
     setState(() {
-      events = data;
+      oneTypeOnly = !(data.map((x) => x.eventType).toSet().length != 1);
+      if(!widget.onlyHeader) {
+        events = data;
+      }
     });
   }
   
   double calculateWidth(BuildContext context){
+    if(oneTypeOnly){
+      return MediaQuery.sizeOf(context).width / 5;
+    }
+
     return MediaQuery.sizeOf(context).width / 10 + 8 * MediaQuery.of(context).devicePixelRatio;
   }
 
   DataRow mapEvent(Event event,  BuildContext context){
     return DataRow(cells: [
+      if(!oneTypeOnly)
       DataCell(SizedBox(width: calculateWidth(context) - 21 * MediaQuery.of(context).devicePixelRatio, child: const Center(child:  Icon(Icons.directions_car)))),
       DataCell(SizedBox(width: calculateWidth(context), child: Center(child: Text(DateFormat('dd.MM').format(event.dateAdded),)))),
       DataCell(SizedBox(width: calculateWidth(context), child: Center(child: Text("${event.distance??"-- "}km".replaceAll(".", delimiter))))),
@@ -64,12 +73,13 @@ class _MileageTableState extends State<MileageTable> {
       width: MediaQuery.of(context).size.width,
       child: DataTable(
         columns: [
+          if(!oneTypeOnly)
           DataColumn(label: SizedBox(width: calculateWidth(context) - 21 * MediaQuery.of(context).devicePixelRatio, child: null)),
           DataColumn(label: SizedBox(width: calculateWidth(context), child: const Center(child: Icon(Icons.calendar_month,)))),
           DataColumn(label: SizedBox(width: calculateWidth(context), child: const Center(child: Icon(Icons.speed)))),
           DataColumn(label: SizedBox(width: calculateWidth(context), child: const Center(child: Icon(Icons.local_gas_station)))),
         ],
-        rows: widget.onlyHeader ? [] : events.map((x) => mapEvent(x, context)).toList(growable: false),
+        rows: events.map((x) => mapEvent(x, context)).toList(growable: false),
       ),
     );
   }
