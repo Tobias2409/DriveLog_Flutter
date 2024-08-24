@@ -29,8 +29,8 @@ class _MileageTableState extends State<MileageTable> {
   DataRow mapEvent(Event event,  BuildContext context){
     return DataRow(cells: [
       DataCell(SizedBox(width: MediaQuery.sizeOf(context).width / 5,child: Center(child: Text(DateFormat('dd.MM').format(event.dateAdded),)))),
-      DataCell(SizedBox(width: MediaQuery.sizeOf(context).width / 5,child: Center(child: Text("${event.distance}km".replaceAll(".", delimiter))))),
-      DataCell(SizedBox(width: MediaQuery.sizeOf(context).width / 5,child: Center(child: Text("${event.fuelConsumption}l")))),
+      DataCell(SizedBox(width: MediaQuery.sizeOf(context).width / 5,child: Center(child: Text("${event.distance??"-- "}km".replaceAll(".", delimiter))))),
+      DataCell(SizedBox(width: MediaQuery.sizeOf(context).width / 5,child: Center(child: Text("${event.fuelConsumption??"-- "}l")))),
     ]);
   }
 
