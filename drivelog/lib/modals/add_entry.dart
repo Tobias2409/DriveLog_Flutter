@@ -42,7 +42,9 @@ class _AddEntryModalState extends State<AddEntryModal> {
     if(selectedMenu == 1 && distance != 0){
       var tripDAO = TripDAO(distance: distance, fuelConsumption: fuelConsumption == 0 ? null : fuelConsumption, carFK: 1);
       _carService.addTrip(tripDAO);
+      Navigator.pop(context);
     }
+
   }
 
   Widget titleText(String text){
