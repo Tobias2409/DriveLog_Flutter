@@ -75,13 +75,12 @@ class CarService extends Observable{
   Future<List<Event>> getEvents(int carID) async{
     var db = await _dbService;
 
-    var trips = await db.query("SELECT * FROM Trip WHERE CarFK = ? ORDER BY DateAdded DESC", [carID]);
-    //var refuels = await db.query("SELECT * FROM Trip WHERE CarFK = ? ", [carID]);
+    var result = await db.query('SELECT * FROM (SELECT "Trip" Type, DateAdded, FuelConsumption Fuel, Distance FROM Trip WHERE CarFK = ? UNION SELECT "Refuel" Type, DateAdded, FuelAmount Fuel, Distance FROM Refuel WHERE CarFK = ?) ORDER BY DateAdded DESC;', [carID, carID]);
 
     List<Event> events = [];
 
-    for(var trip in trips){
-      events.add(Event(EventType.trip, DateTime.parse(trip['DateAdded'] as String) , (trip["Distance"] as num).toDouble(), (trip["FuelConsumption"] as num?)?.toDouble()));
+    for(var event in result){
+      events.add(Event(event["Type"] as String == "Trip" ? EventType.trip : EventType.refuel, DateTime.parse(event['DateAdded'] as String) , (event["Distance"] as num?)?.toDouble(), (event["Fuel"] as num?)?.toDouble()));
     }
 
     return events;
