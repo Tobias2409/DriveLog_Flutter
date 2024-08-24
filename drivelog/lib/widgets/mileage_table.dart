@@ -61,7 +61,7 @@ class _MileageTableState extends State<MileageTable> {
   DataRow mapEvent(Event event,  BuildContext context){
     return DataRow(cells: [
       if(!oneTypeOnly)
-      DataCell(SizedBox(width: calculateWidth(context) - 21 * MediaQuery.of(context).devicePixelRatio, child: const Center(child:  Icon(Icons.directions_car)))),
+      DataCell(SizedBox(width: calculateWidth(context) - 21 * MediaQuery.of(context).devicePixelRatio, child: Center(child: Icon(event.eventType == EventType.trip ? Icons.directions_car : Icons.local_gas_station)))),
       DataCell(SizedBox(width: calculateWidth(context), child: Center(child: Text(DateFormat('dd.MM').format(event.dateAdded),)))),
       DataCell(SizedBox(width: calculateWidth(context), child: Center(child: Text("${event.distance??"-- "}km".replaceAll(".", delimiter))))),
       DataCell(SizedBox(width: calculateWidth(context), child: Center(child: Text("${event.fuelConsumption??"-- "}l".replaceAll(".", delimiter))))),
