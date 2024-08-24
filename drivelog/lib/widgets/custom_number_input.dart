@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'dart:ui';
 
+import 'package:drivelog/helpers/delimiter_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
@@ -20,7 +21,6 @@ class CustomNumberInput extends StatefulWidget {
 }
 
 class _CustomNumberInputState extends State<CustomNumberInput> {
-  static const platform = MethodChannel('at.tobias-schiffelhumer.at/number');
 
   final TextEditingController _controller = TextEditingController();
 
@@ -29,29 +29,12 @@ class _CustomNumberInputState extends State<CustomNumberInput> {
   String decimalSeparator = "x";
 
 
-  getSeparator() async{
-    String sep = ".";
-
-    if(Platform.isIOS){
-      final result = await platform.invokeMethod<String>('getDecimalSeparator');
-      sep = result ?? ".";
-    }
-    else {
-      Locale locale = Localizations.localeOf(context);
-      sep = NumberFormat.decimalPattern(locale.toString()).toString();
-    }
-
-    setState(() {
-      decimalSeparator = sep;
-      _controller.text = _formatNumber(_value);
-    });
-  }
 
   @override
   void initState() {
     super.initState();
 
-    getSeparator();
+    DelimiterHelper.getDelimiter(context).then((x) => decimalSeparator = x);
 
     if(widget.value != null) {
       _value = widget.value!;
