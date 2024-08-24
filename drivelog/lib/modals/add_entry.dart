@@ -29,7 +29,9 @@ class _AddEntryModalState extends State<AddEntryModal> {
   final _carService = CarService.getInstance();
 
 
-  int _selectedMenu = 1;
+  int selectedMenu = 1;
+  double distance = 0;
+  double fuelConsumption = 0;
 
   @override
   initState() {
@@ -37,8 +39,8 @@ class _AddEntryModalState extends State<AddEntryModal> {
   }
 
   _save() {
-    if(_selectedMenu == 1){
-      var tripDAO = TripDAO(distance: 5.5, carFK: 1);
+    if(selectedMenu == 1 && distance != 0){
+      var tripDAO = TripDAO(distance: distance, fuelConsumption: fuelConsumption == 0 ? null : fuelConsumption, carFK: 1);
       _carService.addTrip(tripDAO);
     }
   }
@@ -66,11 +68,11 @@ class _AddEntryModalState extends State<AddEntryModal> {
     return Column(
       children: [
         titleText("Distance"),
-        CustomNumberInput(onChange: (i) => {print("change")}, unit: "km",),
+        CustomNumberInput(onChange: (x) => {distance = x}, unit: "km",),
         //SizedBox(height: 30,),
 
         titleText("Fuel Consumption"),
-        CustomNumberInput(onChange: (i) => {print("change")}, unit: "l"),
+        CustomNumberInput(onChange: (x) => {fuelConsumption = x}, unit: "l"),
       ],
     );
   }
@@ -79,11 +81,11 @@ class _AddEntryModalState extends State<AddEntryModal> {
     return Column(
       children: [
         titleText("Fuel"),
-        CustomNumberInput(onChange: (i) => {print("change")}, unit: "l"),
+        CustomNumberInput(onChange: (x) => {fuelConsumption = x}, unit: "l"),
         //SizedBox(height: 30,),
 
         titleText("Mileage"),
-        CustomNumberInput(onChange: (i) => {print("change")}, unit: "km"),
+        CustomNumberInput(onChange: (x) => {distance = x}, unit: "km"),
       ],
     );
   }
@@ -99,13 +101,13 @@ class _AddEntryModalState extends State<AddEntryModal> {
           padding: const EdgeInsets.all(20),
           child: Column(
             children: [
-              SelectionHeader(text1: "Trip", text2: "Refuel", selectedOption: _selectedMenu, changed: (i) {
+              SelectionHeader(text1: "Trip", text2: "Refuel", selectedOption: selectedMenu, changed: (i) {
                 setState(() {
-                  _selectedMenu = i;
+                  selectedMenu = i;
                 });
               },),
               const Spacer(flex: 1,),
-              _selectedMenu == 1 ? tripWidget() : refuelWidget(),
+              selectedMenu == 1 ? tripWidget() : refuelWidget(),
               const Spacer(flex: 2,),
               Row(
                 children: [
