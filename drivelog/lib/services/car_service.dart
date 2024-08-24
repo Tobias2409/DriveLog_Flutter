@@ -1,5 +1,6 @@
 
 import 'package:drivelog/db/models/car_dao.dart';
+import 'package:drivelog/db/models/refuel_dao.dart';
 import 'package:drivelog/db/models/trip_dao.dart';
 import 'package:drivelog/helpers/observable.dart';
 import 'package:drivelog/models/event.dart';
@@ -31,17 +32,24 @@ class CarService extends Observable{
     return count > 0;
   }
 
-  Future<void> addCar(CarDAO car) async{
+  addCar(CarDAO car) async{
     var db = await _dbService;
     await db.insert(car);
     notify();
   }
 
-  Future<void> addTrip(TripDAO dao) async{
+  addTrip(TripDAO dao) async{
     var db = await _dbService;
     await db.insert(dao);
     notify();
   }
+
+  addRefuel(RefuelDAO dao) async {
+    var db = await _dbService;
+    await db.insert(dao);
+    notify();
+  }
+
 
   Future<List<CarDAO>> getCars() async {
     var db = await _dbService;
@@ -79,6 +87,5 @@ class CarService extends Observable{
     return events;
 
   }
-
 
 }

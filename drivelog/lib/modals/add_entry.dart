@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:drivelog/db/db_service.dart';
 import 'package:drivelog/db/models/car_dao.dart';
+import 'package:drivelog/db/models/refuel_dao.dart';
 import 'package:drivelog/db/models/trip_dao.dart';
 import 'package:drivelog/services/car_service.dart';
 import 'package:drivelog/widgets/custom_button.dart';
@@ -42,6 +43,11 @@ class _AddEntryModalState extends State<AddEntryModal> {
     if(selectedMenu == 1 && distance != 0){
       var tripDAO = TripDAO(distance: distance, fuelConsumption: fuelConsumption == 0 ? null : fuelConsumption, carFK: 1);
       _carService.addTrip(tripDAO);
+      Navigator.pop(context);
+    }
+    else if(selectedMenu == 2 && fuelConsumption != 0){
+      var refuelDAO = RefuelDAO(fuelAmount: fuelConsumption, distance: distance == 0 ? null : distance, carFK: 1);
+      _carService.addRefuel(refuelDAO);
       Navigator.pop(context);
     }
 
