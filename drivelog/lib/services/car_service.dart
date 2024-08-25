@@ -83,8 +83,28 @@ class CarService extends Observable{
       events.add(Event(event["Type"] as String == "Trip" ? EventType.trip : EventType.refuel, DateTime.parse(event['DateAdded'] as String) , (event["Distance"] as num?)?.toDouble(), (event["Fuel"] as num?)?.toDouble()));
     }
 
-    return events;
+    //Calculate Distance for Refuel
+    Event? refuel;
+    double distance = 0;
+    for(var event in events){
+      if(event.eventType == EventType.refuel){
+        if(refuel != null){
+          refuel.distance = distance + (refuel.distance ?? 0);
+        }
+        distance = 0;
+        refuel = event;
+      }
+      else{
+        distance += event.distance??0;
+      }
+    }
 
+    if(refuel != null){
+      refuel.distance = distance + (refuel.distance ?? 0);
+    }
+
+
+    return events;
   }
 
 }
