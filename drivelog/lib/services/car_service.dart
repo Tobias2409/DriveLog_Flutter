@@ -86,25 +86,37 @@ class CarService extends Observable{
     //Calculate Distance for Refuel
     Event? refuel;
     double distance = 0;
+    List<Event> trips = [];
     for(var event in events){
       if(event.eventType == EventType.refuel){
-        if(refuel != null){
-          refuel.distance = distance + (refuel.distance ?? 0);
-        }
-        distance = 0;
+        _calculateEventData(refuel, distance, trips);
         refuel = event;
       }
       else{
         distance += event.distance??0;
+        if(event.fuelConsumption == null) {
+          trips.add(event);
+        }
       }
     }
 
     if(refuel != null){
-      refuel.distance = distance + (refuel.distance ?? 0);
+      _calculateEventData(refuel, distance, trips);
     }
 
 
     return events;
+  }
+
+  void _calculateEventData(Event? refuel, double distance, List<Event> trips) {
+    if(refuel != null){
+      refuel.distance = distance + (refuel.distance ?? 0);
+      double tripsDistance = trips.map((x) => x.distance!).reduce((x, y)=>x+y);
+      for(var trip in trips){
+        trip.fuelConsumption = (refuel.fuelConsumption! / tripsDistance) * trip.distance!;
+      }
+      trips.clear();
+    }
   }
 
 }
