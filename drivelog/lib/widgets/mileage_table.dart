@@ -35,7 +35,12 @@ class _MileageTableState extends State<MileageTable> {
     updateData();
     observer = Observer(updateData);
     carService.subscribe(observer);
+  }
 
+  @override
+  void dispose() {
+    carService.unsubscribe(observer);
+    super.dispose();
   }
 
   updateData() async {
