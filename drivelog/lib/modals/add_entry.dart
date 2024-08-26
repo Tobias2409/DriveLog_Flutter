@@ -73,27 +73,29 @@ class _AddEntryModalState extends State<AddEntryModal> {
   }
 
   Widget tripWidget(){
+    print("Hee");
     return Column(
       children: [
         titleText("Distance"),
-        CustomNumberInput(onChange: (x) => {distance = x}, unit: "km",),
+        CustomNumberInput(onChange: (x) => {distance = x}, value: distance, unit: "km",),
         //SizedBox(height: 30,),
 
         titleText("Fuel Consumption"),
-        CustomNumberInput(onChange: (x) => {fuelConsumption = x}, unit: "l"),
+        CustomNumberInput(onChange: (x) => {fuelConsumption = x}, value: fuelConsumption, unit: "l"),
       ],
     );
   }
 
   Widget refuelWidget(){
+    print("Bert");
     return Column(
       children: [
         titleText("Fuel"),
-        CustomNumberInput(onChange: (x) => {fuelConsumption = x}, unit: "l"),
+        CustomNumberInput(onChange: (x) => {fuelConsumption = x}, value: fuelConsumption, unit: "l",),
         //SizedBox(height: 30,),
 
         titleText("Mileage"),
-        CustomNumberInput(onChange: (x) => {distance = x}, unit: "km"),
+        CustomNumberInput(onChange: (x) => {distance = x}, value: distance, unit: "km"),
       ],
     );
   }

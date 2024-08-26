@@ -9,7 +9,7 @@ class CarDAO {
   String? engineType;
   String? transmissionType;
   String? fuelType;
-  double? mileage;
+  double? startMileage;
   String? color;
   double? price;
   String? vin;
@@ -34,7 +34,7 @@ class CarDAO {
     this.engineType,
     this.transmissionType,
     this.fuelType,
-    this.mileage,
+    this.startMileage,
     this.color,
     this.price,
     this.vin,
@@ -61,7 +61,7 @@ class CarDAO {
       "EngineType": engineType,
       "TransmissionType": transmissionType,
       "FuelType": fuelType,
-      "Mileage": mileage,
+      "StartMileage": startMileage,
       "Color": color,
       "Price": price,
       "VIN": vin,
@@ -89,7 +89,7 @@ class CarDAO {
       engineType: map['EngineType'],
       transmissionType: map['TransmissionType'],
       fuelType: map['FuelType'],
-      mileage: map['Mileage']?.toDouble(),
+      startMileage: map['StartMileage']?.toDouble(),
       color: map['Color'],
       price: map['Price']?.toDouble(),
       vin: map['VIN'],
@@ -118,7 +118,7 @@ class CarDAO {
         'engineType: $engineType, '
         'transmissionType: $transmissionType, '
         'fuelType: $fuelType, '
-        'mileage: $mileage, '
+        'startMileage: $startMileage, '
         'color: $color, '
         'price: $price, '
         'vin: $vin, '

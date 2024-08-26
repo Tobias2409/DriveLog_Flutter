@@ -10,7 +10,7 @@ CREATE TABLE Car(
     EngineType VARCHAR(100),                        -- The type of engine (e.g., Petrol, Diesel, Electric, Hybrid)
     TransmissionType VARCHAR(50),                   -- Type of transmission (e.g., Manual, Automatic, CVT)
     FuelType VARCHAR(50),                           -- Type of fuel used (e.g., Gasoline, Diesel, Electric)
-    Mileage DECIMAL(10,2),                          -- The mileage of the car (e.g., miles per gallon or liters per 100km)
+    StartMileage DECIMAL(10,2),                          -- The mileage of the car (e.g., miles per gallon or liters per 100km)
     Color VARCHAR(50),                              -- The color of the car
     Price DECIMAL(10,2),                            -- Price of the car
     VIN VARCHAR(17) UNIQUE,                         -- Vehicle Identification Number (a unique identifier for each car)
