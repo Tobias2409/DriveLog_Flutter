@@ -73,7 +73,6 @@ class _AddEntryModalState extends State<AddEntryModal> {
   }
 
   Widget tripWidget(){
-    print("Hee");
     return Column(
       children: [
         titleText("Distance"),
@@ -87,7 +86,6 @@ class _AddEntryModalState extends State<AddEntryModal> {
   }
 
   Widget refuelWidget(){
-    print("Bert");
     return Column(
       children: [
         titleText("Fuel"),
