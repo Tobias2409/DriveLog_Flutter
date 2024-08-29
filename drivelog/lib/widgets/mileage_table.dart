@@ -68,8 +68,8 @@ class _MileageTableState extends State<MileageTable> {
       if(!oneTypeOnly)
       DataCell(SizedBox(width: calculateWidth(context) - 21 * MediaQuery.of(context).devicePixelRatio, child: Center(child: Icon(event.eventType == EventType.trip ? Icons.directions_car : Icons.local_gas_station)))),
       DataCell(SizedBox(width: calculateWidth(context), child: Center(child: Text(DateFormat('dd.MM').format(event.dateAdded),)))),
-      DataCell(SizedBox(width: calculateWidth(context), child: Center(child: Text("${event.distance??"-- "}km".replaceAll(".", delimiter))))),
-      DataCell(SizedBox(width: calculateWidth(context), child: Center(child: Text("${event.fuelConsumption??"-- "}l".replaceAll(".", delimiter))))),
+      DataCell(SizedBox(width: calculateWidth(context), child: Center(child: Text("${event.distance?.toStringAsFixed(2).replaceFirst(RegExp(r'\.?0*$'), '')??"-- "}km".replaceAll(".", delimiter))))),
+      DataCell(SizedBox(width: calculateWidth(context), child: Center(child: Text("${event.fuelConsumption?.toStringAsFixed(2).replaceFirst(RegExp(r'\.?0*$'), '')??"-- "}l".replaceAll(".", delimiter))))),
     ]);
   }
 
