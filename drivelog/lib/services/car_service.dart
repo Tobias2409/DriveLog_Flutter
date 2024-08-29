@@ -92,6 +92,7 @@ class CarService extends Observable{
       if(event.eventType == EventType.refuel){
         _calculateEventData(refuel, distance, trips);
         refuel = event;
+        trips.clear();
       }
       else{
         distance += event.distance??0;
@@ -116,7 +117,6 @@ class CarService extends Observable{
       for(var trip in trips){
         trip.fuelConsumption = (refuel.fuelConsumption! / tripsDistance) * trip.distance!;
       }
-      trips.clear();
     }
   }
 
