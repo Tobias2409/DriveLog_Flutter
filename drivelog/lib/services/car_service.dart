@@ -67,7 +67,7 @@ class CarService extends Observable{
   Future<double> getMileage(int carID) async{
     var db = await _dbService;
 
-    var carDistance = ((await db.query("SELECT StartMileage FROM Car WHERE ID = ?", [carID]))[0]["StartMileage"] as num).toDouble();
+    var carDistance = ((await db.query("SELECT StartMileage FROM Car WHERE ID = ?", [carID]))[0]["StartMileage"] as num?)?.toDouble() ?? 0;
     var trips = await db.query("SELECT IFNULL(SUM(Distance),0.0) d FROM Trip WHERE CarFK = ?", [carID]);
 
     return carDistance + (trips[0]['d'] as num).toDouble();
