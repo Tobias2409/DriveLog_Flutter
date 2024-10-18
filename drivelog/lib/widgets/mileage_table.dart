@@ -1,5 +1,6 @@
 import 'package:drivelog/helpers/delimiter_helper.dart';
 import 'package:drivelog/helpers/observer.dart';
+import 'package:drivelog/modals/refuel_info.dart';
 import 'package:drivelog/services/car_service.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
@@ -70,7 +71,9 @@ class _MileageTableState extends State<MileageTable> {
       DataCell(SizedBox(width: calculateWidth(context), child: Center(child: Text(DateFormat('dd.MM').format(event.dateAdded),)))),
       DataCell(SizedBox(width: calculateWidth(context), child: Center(child: Text("${event.distance?.toStringAsFixed(2).replaceFirst(RegExp(r'\.?0*$'), '')??"-- "}km".replaceAll(".", delimiter))))),
       DataCell(SizedBox(width: calculateWidth(context), child: Center(child: Text("${event.fuelConsumption?.toStringAsFixed(2).replaceFirst(RegExp(r'\.?0*$'), '')??"-- "}l".replaceAll(".", delimiter))))),
-    ]);
+    ],
+      onSelectChanged: (_) => RefuelInfo.show(context, event),
+    );
   }
 
   @override
@@ -86,6 +89,7 @@ class _MileageTableState extends State<MileageTable> {
           DataColumn(label: SizedBox(width: calculateWidth(context), child: const Center(child: Icon(Icons.local_gas_station)))),
         ],
         rows: events.map((x) => mapEvent(x, context)).toList(growable: false),
+        showCheckboxColumn: false,
       ),
     );
   }
